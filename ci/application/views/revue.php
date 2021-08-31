@@ -2,33 +2,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 
-<style>
-  h3,
-  p {
-    color: black;
-
-  }
-
-  body {
-    padding-top: 1em;
-  }
-
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    height: 100px;
-    width: 100px;
-    outline: black;
-    background-color: rgba(0, 0, 0, 0.3);
-    background-size: 100%, 100%;
-    border-radius: 50%;
-    border: 1px solid black;
-  }
-</style>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <?php for ($i = 0; $i < count($articles); $i++) { ?>
-      <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo ($i + 1); ?>" <?php if ($i === 0) { ?> class="active" <?php } ?>></li>
+    <?php for ($i = 0; $i < count($articles); $i++) { ?> <!-- ont boucle les slide du carousel en fonction du nombre d'article qu'il dans la boucle-->
+      <li data-target="#carouselExampleIndicators" data-slide-to="<?php echo ($i + 1); ?>" <?php if ($i == 0) { ?> class="active" <?php } ?>></li>
     <?php
     }
     ?>
@@ -36,35 +14,36 @@
 
 
   <div class="carousel-inner">
-    <?php for ($i = 0; $i < count($articles); $i++) {
 
-      $article = $articles[$i];
-      $images = $article["medias"];
-      $picture = $images[0];
-      $photo = $picture["med_files"];
-      $format = $picture["med_format"];
+    <?php for ($i = 0; $i < count($articles); $i++) { 
+    //  ont boucle $articles la fonction count permettra de compter le nombre d'élement 
+      $article = $articles[$i]; //ont sotck les résultats
+      $images = $article["medias"];//ont choisit media dans le tableau
+      $picture = $images[0]; // ont stock le résultat ont met [0] pour partir de la première ligne
+      $photo = $picture["med_files"]; // ont stock le fichier 
+      $format = $picture["med_format"];// ont stock le format 
     ?>
 
 
-      <div class="carousel-item<?= ($i === 0) ? ' active' : ''; ?>">
+      <div class="carousel-item<?= ($i == 0) ? ' active' : ''; ?>">
         <img src="<?php echo base_url("asset/image/$photo.$format") ?>" class="d-block w-30" alt="...">
         <h5><?php echo $article["actu_text"] ?></h5>
+        <!-- pour afficher la description des media ont utilisera $article["actu_texte"] cela permettra de retourner les informations du tableau -->
       </div>
-
+    <!-- base_url("asset/image/$photo.$format") pour charger les images ont utilise $photo et $format pour le format  -->
     <?php
     }
     ?>
   </div>
 
-
-  <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </a>
+  <a class="carousel-control-prev" href="#carouselrevue" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Précédent</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselrevue" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Suivant</span>
+    </a>
 </div>
 
 <form>
