@@ -9,12 +9,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 		public function activite()
 		{
-
-		
-			// Appel des vues  
+            // Appel des vues
 			$this->load->view('entete');
 			$this->load->view('activite');
-            
+            $this->load->view('footer');
 		}
 
 ///////////////////////////////////////////
@@ -30,6 +28,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		// var_dump($aView["media"]);
 		$this->load->view('entete');
 		$this->load->view('revue',$aView);
+        $this->load->view('footer');
 		
 	}
 
@@ -47,6 +46,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 		$this->load->view('entete');
 		$this->load->view('action', $aView);
+        $this->load->view('footer');
 	}
 
 /////////////////////////////////////////////
@@ -58,10 +58,11 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 		$aListe = $this->ImageModel->articles('nos travaux en cours');
 
 		// Ajoute des résultats de la requête au tableau des variables à transmettre à la vue   
-		$aView["media"] = $aListe;
+		$aView["articles"] = $aListe;
 
 		$this->load->view('entete');
-		$this->load->view('chantier');
+		$this->load->view('chantier', $aView);
+        $this->load->view('footer');
 	}
 
 	}
